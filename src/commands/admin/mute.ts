@@ -6,8 +6,8 @@ import { embedMessage } from '../../utils/messages/embedMessage';
 export const data = new SlashCommandBuilder()
   .setName('mute')
   .setDescription('뮤트 명령어')
-  .addSubcommand(subcommand =>
-    subcommand
+  .addSubcommand(option =>
+    option
       .setName('add')
       .setDescription('뮤트 시작')
       .addUserOption(option =>
@@ -17,8 +17,8 @@ export const data = new SlashCommandBuilder()
           .setRequired(true)
       )
   )
-  .addSubcommand(subcommand =>
-    subcommand
+  .addSubcommand(option =>
+    option
       .setName('remove')
       .setDescription('뮤트 해제')
       .addUserOption(option =>
@@ -39,7 +39,7 @@ export async function execute(interaction: CommandInteraction) {
     return await embedMessage(
       interaction,
       'RED',
-      '🚫 - 관리자 권한이 없습니다.'
+      '🚫 │ 관리자 권한이 없습니다.'
     );
   }
 
@@ -47,7 +47,7 @@ export async function execute(interaction: CommandInteraction) {
     return await embedMessage(
       interaction,
       'RED',
-      '🚫 - 서버의 지정된 뮤트 역할이 존재하지 않습니다.'
+      '🚫 │ 서버의 지정된 뮤트 역할이 존재하지 않습니다.'
     );
   }
 
@@ -57,7 +57,7 @@ export async function execute(interaction: CommandInteraction) {
         return await embedMessage(
           interaction,
           'RED',
-          `🚫 - ${target} 님은 이미 뮤트 상태입니다.`
+          `🚫 │ ${target} 님은 이미 뮤트 상태입니다.`
         );
       }
 
@@ -66,7 +66,7 @@ export async function execute(interaction: CommandInteraction) {
       return await embedMessage(
         interaction,
         'GREEN',
-        `🔇 - ${target} 님을 뮤트 하였습니다.`
+        `🔇 │ ${target} 님을 뮤트 하였습니다.`
       );
 
     case 'remove': // mute remove @target
@@ -75,7 +75,7 @@ export async function execute(interaction: CommandInteraction) {
       return await embedMessage(
         interaction,
         'GREEN',
-        `🔊 - ${target} 님을 뮤트 해제 하였습니다.`
+        `🔊 │ ${target} 님을 뮤트 해제 하였습니다.`
       );
   }
 }
