@@ -70,6 +70,14 @@ export async function execute(interaction: CommandInteraction) {
       );
 
     case 'remove': // mute remove @target
+      if (!target.roles.cache.has(ROLE_MUTE_ID)) {
+        return await embedMessage(
+          interaction,
+          'RED',
+          `🚫 │ ${target} 님은 뮤트 상태가 아닙니다.`
+        );
+      }
+
       await target.roles.remove(ROLE_MUTE_ID);
 
       return await embedMessage(
