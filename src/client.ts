@@ -1,4 +1,4 @@
-import { Client } from 'discord.js';
+import { Client, Intents } from 'discord.js';
 import * as commandModules from './commands';
 import config from './config';
 
@@ -6,7 +6,7 @@ const { DISCORD_TOKEN } = config;
 const commands = Object(commandModules);
 
 export const client = new Client({
-  intents: ['GUILDS'],
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES],
 });
 
 client.once('ready', () => {
