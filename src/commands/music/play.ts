@@ -31,5 +31,5 @@ export async function execute(interaction: CommandInteraction) {
     );
   }
 
-  return await embedMessage(interaction, 'AQUA', `${voiceChannel}`);
+  return await embedMessage(interaction, 'AQUA', `${title}`);
 }

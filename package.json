@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./build/index.js",
-    "dev": "concurrently \"tsc -w\" \"nodemon ./build/index.js\"",
-    "dev:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "pre": "concurrently \"tsc\" \"node ./build/deploy-commands.js\"",
     "deploy:commands": "tsc && node ./build/deploy-commands.js"
   },
   "dependencies": {
