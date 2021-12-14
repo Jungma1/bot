@@ -1,9 +1,10 @@
 import { Client, Intents } from 'discord.js';
-import * as commandModules from './commands';
 import config from './config';
+import { readdirSync } from 'fs';
+import path from 'path';
 
 const { DISCORD_TOKEN } = config;
-const commands = Object(commandModules);
+const eventPath = path.join(__dirname, 'events');
 
 export const client = new Client({
   intents: [
@@ -13,16 +14,14 @@ export const client = new Client({
   ],
 });
 
-client.once('ready', () => {
-  console.log('✅ Discord bot ready!');
-});
+readdirSync(eventPath).forEach(async file => {
+  const { event } = await import(`${eventPath}/${file}`);
 
-client.on('interactionCreate', async interaction => {
-  if (!interaction.isCommand()) return;
-
-  const { commandName } = interaction;
-
-  commands[commandName].execute(interaction, client);
+  if (event.once) {
+    client.once(event.name, (...args) => event.execute(client, ...args));
+  } else {
+    client.on(event.name, (...args) => event.execute(client, ...args));
+  }
 });
 
 client.login(DISCORD_TOKEN);
