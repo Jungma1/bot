@@ -6,7 +6,11 @@ const { DISCORD_TOKEN } = config;
 const commands = Object(commandModules);
 
 export const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES],
+  intents: [
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_VOICE_STATES,
+    Intents.FLAGS.GUILD_MESSAGES,
+  ],
 });
 
 client.once('ready', () => {
