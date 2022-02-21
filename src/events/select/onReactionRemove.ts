@@ -15,9 +15,10 @@ export const event: Event = {
       GAMER_EMOJI_NAME,
       PRO_EMOJI_NAME,
     } = config;
-    const sender = reaction.message.member;
 
     if (reaction.message.channel.id === ROLE_SELECT_CHANNEL_ID) {
+      const sender = await reaction.message.guild?.members.fetch(user.id);
+      
       switch (reaction.emoji.name) {
         case GAMER_EMOJI_NAME:
           await sender?.roles.remove(ROLE_GAMER_ID);
