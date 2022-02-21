@@ -1,6 +1,6 @@
 import { Client, CommandInteraction } from 'discord.js';
-import { CommandList } from '../commands';
-import { Event } from '../interfaces/Event';
+import { CommandList } from '../../commands';
+import { Event } from '../../interfaces/Event';
 
 export const event: Event = {
   name: 'interactionCreate',

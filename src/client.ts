@@ -14,13 +14,19 @@ export const client = new Client({
   ],
 });
 
-readdirSync(eventPath).forEach(async (file) => {
-  const { event } = await import(`${eventPath}/${file}`);
+readdirSync(eventPath).forEach(async (dir) => {
+  const files = readdirSync(`${eventPath}/${dir}`).filter((file) =>
+    file.endsWith('.ts')
+  );
 
-  if (event.once) {
-    client.once(event.name, (...args) => event.execute(client, ...args));
-  } else {
-    client.on(event.name, (...args) => event.execute(client, ...args));
+  for (const file of files) {
+    const { event } = await import(`${eventPath}/${dir}/${file}`);
+
+    if (event.once) {
+      client.once(event.name, (...args) => event.execute(client, ...args));
+    } else {
+      client.on(event.name, (...args) => event.execute(client, ...args));
+    }
   }
 });
 
