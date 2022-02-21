@@ -1,16 +1,18 @@
 import { Client, CommandInteraction } from 'discord.js';
-import * as commandModules from '../commands';
+import { CommandList } from '../commands';
 import { Event } from '../interfaces/Event';
 
 export const event: Event = {
   name: 'interactionCreate',
   once: false,
-  execute(client: Client, interaction: CommandInteraction) {
-    const commands = Object(commandModules);
-    const { commandName } = interaction;
-
+  async execute(client: Client, interaction: CommandInteraction) {
     if (!interaction.isCommand()) return;
 
-    commands[commandName].execute(interaction, client);
+    for (const command of CommandList) {
+      if (interaction.commandName === command.name) {
+        await command.run(interaction);
+        break;
+      }
+    }
   },
 };
