@@ -14,7 +14,7 @@ export const client = new Client({
   ],
 });
 
-readdirSync(eventPath).forEach(async file => {
+readdirSync(eventPath).forEach(async (file) => {
   const { event } = await import(`${eventPath}/${file}`);
 
   if (event.once) {

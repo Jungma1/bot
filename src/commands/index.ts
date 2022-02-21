@@ -1,4 +1,4 @@
 import { Command } from '../interfaces/Command';
-import { ping } from './ping';
+import { info } from './info';
 
-export const CommandList: Command[] = [ping];
+export const CommandList: Command[] = [info];

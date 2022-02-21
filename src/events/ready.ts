@@ -1,4 +1,3 @@
-import { Client } from 'discord.js';
 import { Event } from '../interfaces/Event';
 
 export const event: Event = {
