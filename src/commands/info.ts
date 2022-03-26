@@ -5,6 +5,7 @@ import blank from '../lib/blank';
 
 export const info: Command = {
   name: '정보',
+  permission: false,
   /**
    * Slash command data
    */
