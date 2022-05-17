@@ -34,7 +34,7 @@ export const info: Command = {
           value: `ㄴ ${interaction.client.ws.ping.toString()} \t`,
         },
         { name: '🅿️│ 개발 언어', value: 'ㄴ Typescript' },
-        { name: '🛠│ 사용된 라이브러리', value: 'ㄴ discord.js (13.3.1)' },
+        { name: '🛠│ 사용된 라이브러리', value: 'ㄴ discord.js (13.7.0)' },
         {
           name: `<:github:945216252723490816>│ 깃허브 링크`,
           value: `ㄴ ${githubLink}`,
