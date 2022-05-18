@@ -33,9 +33,9 @@ export const event: Event = {
       });
     });
 
-    await client.guilds.cache
-      .get(GUILD_ID)
-      ?.commands.permissions.set({ fullPermissions });
+    // await client.guilds.cache
+    //   .get(GUILD_ID)
+    //   ?.commands.permissions.set({ fullPermissions }).catch(err => console.log(err));
 
     console.log('✅ Discord bot ready!');
   },
