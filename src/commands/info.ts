@@ -1,6 +1,6 @@
 import { Command } from '../interfaces/Command';
 import { SlashCommandBuilder, hyperlink } from '@discordjs/builders';
-import { MessageEmbedOptions } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 
 export const info: Command = {
   name: '정보',
@@ -13,14 +13,15 @@ export const info: Command = {
       'NARE_BOT_GITHUB',
       'https://github.com/jungma1/nare-bot'
     );
-    const infoEmbedOptions: MessageEmbedOptions = {
-      color: 'AQUA',
-      author: {
-        name: interaction.client.user?.username,
+
+    const infoEmbed = new EmbedBuilder()
+      .setColor('Aqua')
+      .setAuthor({
+        name: interaction.client.user!.username,
         iconURL: interaction.client.user?.displayAvatarURL(),
-      },
-      description: `SpaceTime 전용 서버 관리 봇 입니다.`,
-      fields: [
+      })
+      .setDescription('SpaceTime 전용 서버 관리 봇 입니다.')
+      .setFields([
         { name: '\u200B', value: '\u200B' },
         {
           name: '🌐│ 핑',
@@ -33,14 +34,13 @@ export const info: Command = {
           value: `ㄴ ${githubLink}`,
         },
         { name: '\u200B', value: '\u200B' },
-      ],
-      timestamp: new Date(),
-      footer: {
+      ])
+      .setTimestamp(new Date())
+      .setFooter({
         text: interaction.user.username,
         iconURL: interaction.user.displayAvatarURL(),
-      },
-    };
+      });
 
-    await interaction.reply({ embeds: [infoEmbedOptions] });
+    await interaction.reply({ embeds: [infoEmbed] });
   },
 };
