@@ -32,6 +32,4 @@ readdirSync(eventPath).forEach(async (dir) => {
   }
 });
 
-// test
-
 client.login(DISCORD_TOKEN);

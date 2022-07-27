@@ -10,11 +10,6 @@ const {
   ROLE_USER_ID,
   ROLE_MUTED_ID,
   ROLE_BOT_ID,
-  ROLE_SELECT_CHANNEL_ID,
-  ROLE_GAMER_ID,
-  ROLE_PRO_ID,
-  GAMER_EMOJI_NAME,
-  PRO_EMOJI_NAME,
 } = process.env;
 
 if (
@@ -24,12 +19,7 @@ if (
   !ROLE_ADMIN_ID ||
   !ROLE_USER_ID ||
   !ROLE_MUTED_ID ||
-  !ROLE_BOT_ID ||
-  !ROLE_SELECT_CHANNEL_ID ||
-  !ROLE_GAMER_ID ||
-  !ROLE_PRO_ID ||
-  !GAMER_EMOJI_NAME ||
-  !PRO_EMOJI_NAME
+  !ROLE_BOT_ID
 ) {
   throw new Error('Missing environment variables');
 }
@@ -42,11 +32,6 @@ const config = {
   ROLE_USER_ID,
   ROLE_MUTED_ID,
   ROLE_BOT_ID,
-  ROLE_SELECT_CHANNEL_ID,
-  ROLE_GAMER_ID,
-  ROLE_PRO_ID,
-  GAMER_EMOJI_NAME,
-  PRO_EMOJI_NAME,
 };
 
 export default config;

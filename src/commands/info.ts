@@ -1,20 +1,13 @@
 import { Command } from '../interfaces/Command';
 import { SlashCommandBuilder, hyperlink } from '@discordjs/builders';
 import { MessageEmbedOptions } from 'discord.js';
-import blank from '../lib/blank';
 
 export const info: Command = {
   name: '정보',
   permission: false,
-  /**
-   * Slash command data
-   */
   data: new SlashCommandBuilder()
     .setName('정보')
     .setDescription('NARE 봇의 정보를 표시합니다.'),
-  /**
-   * Slash command run
-   */
   run: async (interaction) => {
     const githubLink = hyperlink(
       'NARE_BOT_GITHUB',
@@ -34,7 +27,7 @@ export const info: Command = {
           value: `ㄴ ${interaction.client.ws.ping.toString()} \t`,
         },
         { name: '🅿️│ 개발 언어', value: 'ㄴ Typescript' },
-        { name: '🛠│ 사용된 라이브러리', value: 'ㄴ discord.js (13.7.0)' },
+        { name: '🛠│ 사용된 라이브러리', value: 'ㄴ discord.js' },
         {
           name: `<:github:945216252723490816>│ 깃허브 링크`,
           value: `ㄴ ${githubLink}`,
@@ -48,6 +41,6 @@ export const info: Command = {
       },
     };
 
-    await interaction.reply({ embeds: [infoEmbedOptions], ephemeral: true });
+    await interaction.reply({ embeds: [infoEmbedOptions] });
   },
 };
