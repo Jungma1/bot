@@ -17,9 +17,11 @@ export const client = new Client({
 });
 
 readdirSync(eventPath).forEach(async (dir) => {
-  const files = readdirSync(`${eventPath}/${dir}`).filter((file) =>
-    file.endsWith('.ts')
-  );
+  const files = readdirSync(`${eventPath}/${dir}`).filter((file) => {
+    if (file.endsWith('.js') || file.endsWith('.ts')) return file;
+  });
+
+  console.log(files);
 
   for (const file of files) {
     const { event } = await import(`${eventPath}/${dir}/${file}`);
