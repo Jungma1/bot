@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "start": "ts-node src/index.ts",
     "start:dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "deploy:commands": "tsc && node ./build/deploy-commands.js"
   },

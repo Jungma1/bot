@@ -9,7 +9,6 @@ const {
   ROLE_ADMIN_ID,
   ROLE_USER_ID,
   ROLE_MUTED_ID,
-  ROLE_BOT_ID,
 } = process.env;
 
 if (
@@ -18,8 +17,7 @@ if (
   !GUILD_ID ||
   !ROLE_ADMIN_ID ||
   !ROLE_USER_ID ||
-  !ROLE_MUTED_ID ||
-  !ROLE_BOT_ID
+  !ROLE_MUTED_ID
 ) {
   throw new Error('Missing environment variables');
 }
@@ -31,7 +29,6 @@ const config = {
   ROLE_ADMIN_ID,
   ROLE_USER_ID,
   ROLE_MUTED_ID,
-  ROLE_BOT_ID,
 };
 
 export default config;
