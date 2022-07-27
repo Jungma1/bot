@@ -5,9 +5,10 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/index.ts",
+    "start": "node build/index.js",
     "start:dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "deploy:commands": "tsc && node ./build/deploy-commands.js"
+    "deploy:commands": "tsc && node ./build/deploy-commands.js",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@discordjs/rest": "^1.0.0",
