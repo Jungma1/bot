@@ -1,1 +1,1 @@
-worker: node build/index.js
+worker: node build/index.js && node build/deploy-commands.js
