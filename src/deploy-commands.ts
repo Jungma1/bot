@@ -4,7 +4,7 @@ import { Routes } from 'discord-api-types/v9';
 import config from './config';
 import { CommandList } from './commands';
 
-const { DISCORD_TOKEN, CLIENT_ID, GUILD_ID } = config;
+const { DISCORD_TOKEN, CLIENT_ID } = config;
 
 const commands = [];
 
@@ -12,10 +12,10 @@ for (const command of CommandList) {
   commands.push(command.data);
 }
 
-const rest = new REST({ version: '9' }).setToken(DISCORD_TOKEN);
+const rest = new REST({ version: '10' }).setToken(DISCORD_TOKEN);
 
 rest
-  .put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
+  .put(Routes.applicationCommands(CLIENT_ID), {
     body: commands,
   })
   .then(() => {

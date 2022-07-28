@@ -21,8 +21,6 @@ readdirSync(eventPath).forEach(async (dir) => {
     if (file.endsWith('.js') || file.endsWith('.ts')) return file;
   });
 
-  console.log(files);
-
   for (const file of files) {
     const { event } = await import(`${eventPath}/${dir}/${file}`);
 
