@@ -45,7 +45,8 @@ export const findSummonerDataByName = async (
         username
       )}`
     )
-    .then((result) => result.data);
+    .then((result) => result.data)
+    .catch(() => null);
 };
 
 export const findSummonerLeagueDataById = async (
@@ -55,7 +56,8 @@ export const findSummonerLeagueDataById = async (
     .get(
       `https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`
     )
-    .then((result) => result.data);
+    .then((result) => result.data)
+    .catch(() => null);
 };
 
 export default riotClient;

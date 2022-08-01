@@ -23,9 +23,16 @@ export const lol: Command = {
   run: async (interaction) => {
     const options = interaction.options as CommandInteractionOptionResolver;
     const username = options.getString('username', true);
-    const { id } = await findSummonerDataByName(username);
-    const summonerLeagueData = await findSummonerLeagueDataById(id);
+    const summonerData = await findSummonerDataByName(username);
 
-    await interaction.reply(`${JSON.stringify(summonerLeagueData)}`);
+    if (summonerData) {
+      const summonerLeagueData = await findSummonerLeagueDataById(
+        summonerData.id
+      );
+
+      await interaction.reply(`${JSON.stringify(summonerLeagueData)}`);
+    } else {
+      await interaction.reply('소환사님을 찾지 못했어요!');
+    }
   },
 };
