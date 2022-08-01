@@ -1,4 +1,4 @@
-import { Command } from '../interfaces/Command';
+import { Command } from '../interface/Command';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { EmbedBuilder, hyperlink } from 'discord.js';
 import { emojiPalette } from '../lib/emojiPalette';
@@ -8,7 +8,7 @@ export const info: Command = {
   permission: false,
   data: new SlashCommandBuilder()
     .setName('정보')
-    .setDescription('나래봇에 대한 정보를 볼 수 있는 명령어에요!'),
+    .setDescription('나래에 대한 정보를 볼 수 있는 명령어에요!'),
   run: async (interaction) => {
     const githubHyperLink = hyperlink(
       'Team Nare',

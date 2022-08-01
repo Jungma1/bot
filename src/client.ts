@@ -4,7 +4,7 @@ import { readdirSync } from 'fs';
 import path from 'path';
 
 const { DISCORD_TOKEN } = config;
-const eventPath = path.join(__dirname, 'events');
+const eventPath = path.join(__dirname, 'event');
 
 export const client = new Client({
   intents: [

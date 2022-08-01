@@ -1,4 +1,4 @@
-import { Event } from '../../interfaces/Event';
+import { Event } from '../../interface/Event';
 
 export const event: Event = {
   name: 'ready',
