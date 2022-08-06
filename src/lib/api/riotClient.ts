@@ -1,7 +1,11 @@
 import axios from 'axios';
 import config from '../../config';
 
-interface SummonerData {
+export const RANKED_SOLO = 'RANKED_SOLO_5x5';
+export const RANKED_FLEX_SR = 'RANKED_FLEX_SR';
+export const RANKED_TFT_DOUBLE_UP = 'RANKED_TFT_DOUBLE_UP';
+
+export interface SummonerData {
   id: string;
   accountId: string;
   puuid: string;
@@ -11,7 +15,7 @@ interface SummonerData {
   summonerLevel: number;
 }
 
-interface SummonerLeagueData {
+export interface SummonerLeagueData {
   leagueId: string;
   queueType: string;
   tier: string;
@@ -36,28 +40,30 @@ const riotClient = axios.create({
   },
 });
 
-export const findSummonerDataByName = async (
-  username: string
-): Promise<SummonerData> => {
-  return riotClient
-    .get(
+export const findSummonerDataByName = async (username: string) => {
+  try {
+    const { data: response } = await riotClient.get<SummonerData>(
       `https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(
         username
       )}`
-    )
-    .then((result) => result.data)
-    .catch(() => null);
+    );
+
+    return response;
+  } catch (error) {
+    return null;
+  }
 };
 
-export const findSummonerLeagueDataById = async (
-  summonerId: string
-): Promise<SummonerLeagueData> => {
-  return riotClient
-    .get(
+export const findSummonerLeagueDataById = async (summonerId: string) => {
+  try {
+    const { data: response } = await riotClient.get<SummonerLeagueData[]>(
       `https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`
-    )
-    .then((result) => result.data)
-    .catch(() => null);
+    );
+
+    return response;
+  } catch (error) {
+    return null;
+  }
 };
 
 export default riotClient;

@@ -1,11 +1,14 @@
 import {
+  AttachmentBuilder,
   CommandInteractionOptionResolver,
+  EmbedBuilder,
   SlashCommandBuilder,
 } from 'discord.js';
 import { Command } from '../../interface/Command';
 import {
   findSummonerDataByName,
   findSummonerLeagueDataById,
+  RANKED_SOLO,
 } from '../../lib/api/riotClient';
 
 export const lol: Command = {
@@ -25,14 +28,72 @@ export const lol: Command = {
     const username = options.getString('username', true);
     const summonerData = await findSummonerDataByName(username);
 
-    if (summonerData) {
-      const summonerLeagueData = await findSummonerLeagueDataById(
-        summonerData.id
+    if (!summonerData) {
+      return interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setColor('Aqua')
+            .setDescription('**소환사님의 정보를 찾지 못했어요!**'),
+        ],
+      });
+    }
+
+    const summonerLeagueDataList = await findSummonerLeagueDataById(
+      summonerData.id
+    );
+
+    const summonerSoloRankData = summonerLeagueDataList?.find(
+      (league) => league.queueType === RANKED_SOLO
+    );
+
+    const tierImageName = `${summonerSoloRankData?.tier}.png`;
+
+    const file = new AttachmentBuilder(`./src/assets/emblem/${tierImageName}`);
+
+    const summonerDataEmbed = new EmbedBuilder()
+      .setColor('Aqua')
+      .setTitle(summonerData.name)
+      .setThumbnail(
+        `http://ddragon.leagueoflegends.com/cdn/12.14.1/img/profileicon/${summonerData.profileIconId}.png`
+      )
+      .setImage(`attachment://${tierImageName}`)
+      .setFields(
+        { name: '\u200B', value: '\u200B' },
+        {
+          name: '⎮ 랭크 경기',
+          value: `⎮ ${RANKED_SOLO}`,
+        },
+        { name: '\u200B', value: '\u200B' },
+        {
+          name: '⎪ 레벨',
+          value: `⎪ ${summonerData.summonerLevel}`,
+        },
+        {
+          name: '⎪ 티어',
+          value: `${
+            summonerSoloRankData
+              ? `⎪ ${summonerSoloRankData?.tier}` +
+                ` ${summonerSoloRankData?.rank}`
+              : '⎪ UnRanked'
+          }`,
+        },
+        {
+          name: '⎪ 리그 포인트',
+          value: `⎪ ${summonerSoloRankData?.leaguePoints || 0} LP`,
+          inline: true,
+        },
+        {
+          name: '⎪ 승리',
+          value: `⎪ ${summonerSoloRankData?.wins || 0}`,
+          inline: true,
+        },
+        {
+          name: '⎪ 패배',
+          value: `⎪ ${summonerSoloRankData?.losses || 0}`,
+          inline: true,
+        }
       );
 
-      await interaction.reply(`${JSON.stringify(summonerLeagueData)}`);
-    } else {
-      await interaction.reply('소환사님을 찾지 못했어요!');
-    }
+    await interaction.reply({ embeds: [summonerDataEmbed], files: [file] });
   },
 };
