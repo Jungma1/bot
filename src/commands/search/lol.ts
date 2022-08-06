@@ -49,7 +49,7 @@ export const lol: Command = {
 
     const tierImageName = `${summonerSoloRankData?.tier}.png`;
 
-    const file = new AttachmentBuilder(`./src/assets/emblem/${tierImageName}`);
+    const file = new AttachmentBuilder(`./src/assets/tier/${tierImageName}`);
 
     const riotLink = hyperlink(
       'https://developer.riotgames.com/',
