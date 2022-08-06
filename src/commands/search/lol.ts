@@ -2,6 +2,7 @@ import {
   AttachmentBuilder,
   CommandInteractionOptionResolver,
   EmbedBuilder,
+  hyperlink,
   SlashCommandBuilder,
 } from 'discord.js';
 import { Command } from '../../interface/Command';
@@ -50,6 +51,11 @@ export const lol: Command = {
 
     const file = new AttachmentBuilder(`./src/assets/emblem/${tierImageName}`);
 
+    const riotLink = hyperlink(
+      'https://developer.riotgames.com/',
+      'https://developer.riotgames.com/'
+    );
+
     const summonerDataEmbed = new EmbedBuilder()
       .setColor('Aqua')
       .setTitle(summonerData.name)
@@ -91,6 +97,11 @@ export const lol: Command = {
           name: '⎪ 패배',
           value: `⎪ ${summonerSoloRankData?.losses || 0}`,
           inline: true,
+        },
+        { name: '\u200B', value: '\u200B' },
+        {
+          name: 'Data Source',
+          value: riotLink,
         }
       );
 
