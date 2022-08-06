@@ -1,4 +1,5 @@
 import { ActivityOptions } from 'discord.js';
+import config from '../../config';
 import { Event } from '../../interface/Event';
 
 export const event: Event = {
@@ -6,6 +7,7 @@ export const event: Event = {
   once: false,
   async execute(client) {
     let index = 0;
+    const { BOT_ACTIVITY_MS } = config;
 
     setInterval(async () => {
       const serverCount = client.guilds.cache.size;
@@ -16,10 +18,10 @@ export const event: Event = {
 
       const activityList: ActivityOptions[] = [
         {
-          name: `${memberCount}명 유저가 나래와 함께하는 중이에요!`,
+          name: `${memberCount}명의 유저가 나래와 함께`,
         },
         {
-          name: `${serverCount}개 서버에서 나래를 이용하고 있어요!`,
+          name: `${serverCount}개의 서버에서 나래가 활동`,
         },
         { name: `/정보 명령어를 입력해보세요!` },
         { name: `/롤전적 명령어로 게임 전적을 확인할 수 있어요!` },
@@ -29,7 +31,7 @@ export const event: Event = {
       index++;
 
       if (index >= activityList.length) index = 0;
-    }, 60 * 1000);
+    }, Number(BOT_ACTIVITY_MS));
 
     console.log('✅ Discord bot ready!');
   },
