@@ -29,7 +29,7 @@ export const event: Event = {
       index++;
 
       if (index >= activityList.length) index = 0;
-    }, 5 * 1000);
+    }, 60 * 1000);
 
     console.log('✅ Discord bot ready!');
   },
