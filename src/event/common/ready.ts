@@ -1,4 +1,4 @@
-import { ActivityOptions } from 'discord.js';
+import { ActivityOptions, GuildMember } from 'discord.js';
 import config from '../../config';
 import { Event } from '../../interface/Event';
 
@@ -11,10 +11,9 @@ export const event: Event = {
 
     setInterval(async () => {
       const serverCount = client.guilds.cache.size;
-      const memberCount = client.guilds.cache.reduce(
-        (a, b) => a + b.memberCount,
-        0
-      );
+      const memberCount = client.guilds.cache
+        .flatMap((guild) => guild.members.cache)
+        .filter((member) => !member.user.bot).size;
 
       const activityList: ActivityOptions[] = [
         {
