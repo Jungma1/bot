@@ -1,9 +1,21 @@
 import axios from 'axios';
 import config from '../../config';
 
+export const UNRANKED = 'UNRANKED';
 export const RANKED_SOLO = 'RANKED_SOLO_5x5';
 export const RANKED_FLEX_SR = 'RANKED_FLEX_SR';
 export const RANKED_TFT_DOUBLE_UP = 'RANKED_TFT_DOUBLE_UP';
+
+const LeagueGamemodeOptions = {
+  UNRANKED,
+  RANKED_SOLO,
+  RANKED_FLEX_SR,
+  RANKED_TFT_DOUBLE_UP,
+};
+
+type Union<T> = T[keyof T];
+
+export type LeagueGamemodeType = Union<typeof LeagueGamemodeOptions>;
 
 export interface SummonerData {
   id: string;
@@ -62,7 +74,7 @@ export const findSummonerLeagueDataById = async (summonerId: string) => {
 
     return response;
   } catch (error) {
-    return null;
+    return [];
   }
 };
 

@@ -1,16 +1,19 @@
 import {
-  AttachmentBuilder,
   CommandInteractionOptionResolver,
   EmbedBuilder,
-  hyperlink,
   SlashCommandBuilder,
 } from 'discord.js';
 import { Command } from '../../interface/Command';
 import {
   findSummonerDataByName,
   findSummonerLeagueDataById,
+  LeagueGamemodeType,
+  RANKED_FLEX_SR,
   RANKED_SOLO,
+  RANKED_TFT_DOUBLE_UP,
+  UNRANKED,
 } from '../../lib/api/riotClient';
+import { replyRiotEmbed } from '../../lib/utils/replyRiotEmbed';
 
 export const lol: Command = {
   name: '롤전적',
@@ -39,72 +42,42 @@ export const lol: Command = {
       });
     }
 
-    const summonerLeagueDataList = await findSummonerLeagueDataById(
+    const summonerLeagueData = await findSummonerLeagueDataById(
       summonerData.id
     );
 
-    const summonerSoloRankData = summonerLeagueDataList?.find(
-      (league) => league.queueType === RANKED_SOLO
-    );
+    if (summonerLeagueData.length === 0) {
+      replyRiotEmbed(UNRANKED, interaction, summonerData, summonerLeagueData);
+    }
 
-    const tierImageName = `${summonerSoloRankData?.tier}.png`;
+    // const gamemode = summonerLeagueData.flatMap((league) => league.queueType);
+    const choiceMode: LeagueGamemodeType = RANKED_SOLO;
 
-    const file = new AttachmentBuilder(`./src/assets/tier/${tierImageName}`);
-
-    const riotLink = hyperlink(
-      'https://developer.riotgames.com/',
-      'https://developer.riotgames.com/'
-    );
-
-    const summonerDataEmbed = new EmbedBuilder()
-      .setColor('Aqua')
-      .setTitle(summonerData.name)
-      .setThumbnail(
-        `http://ddragon.leagueoflegends.com/cdn/12.14.1/img/profileicon/${summonerData.profileIconId}.png`
-      )
-      .setImage(`attachment://${tierImageName}`)
-      .setFields(
-        { name: '\u200B', value: '\u200B' },
-        {
-          name: '⎮ 랭크 경기',
-          value: `⎮ ${RANKED_SOLO}`,
-        },
-        { name: '\u200B', value: '\u200B' },
-        {
-          name: '⎪ 레벨',
-          value: `⎪ ${summonerData.summonerLevel}`,
-        },
-        {
-          name: '⎪ 티어',
-          value: `${
-            summonerSoloRankData
-              ? `⎪ ${summonerSoloRankData?.tier}` +
-                ` ${summonerSoloRankData?.rank}`
-              : '⎪ UnRanked'
-          }`,
-        },
-        {
-          name: '⎪ 리그 포인트',
-          value: `⎪ ${summonerSoloRankData?.leaguePoints || 0} LP`,
-          inline: true,
-        },
-        {
-          name: '⎪ 승리',
-          value: `⎪ ${summonerSoloRankData?.wins || 0}`,
-          inline: true,
-        },
-        {
-          name: '⎪ 패배',
-          value: `⎪ ${summonerSoloRankData?.losses || 0}`,
-          inline: true,
-        },
-        { name: '\u200B', value: '\u200B' },
-        {
-          name: 'Data Source',
-          value: riotLink,
-        }
+    if (choiceMode === RANKED_SOLO) {
+      return replyRiotEmbed(
+        RANKED_SOLO,
+        interaction,
+        summonerData,
+        summonerLeagueData
       );
+    }
 
-    await interaction.reply({ embeds: [summonerDataEmbed], files: [file] });
+    if (choiceMode === RANKED_FLEX_SR) {
+      return replyRiotEmbed(
+        RANKED_FLEX_SR,
+        interaction,
+        summonerData,
+        summonerLeagueData
+      );
+    }
+
+    if (choiceMode === RANKED_TFT_DOUBLE_UP) {
+      return replyRiotEmbed(
+        RANKED_TFT_DOUBLE_UP,
+        interaction,
+        summonerData,
+        summonerLeagueData
+      );
+    }
   },
 };
