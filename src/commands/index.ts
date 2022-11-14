@@ -1,5 +1,6 @@
 import { Command } from '../interface/Command';
-import { info } from './info';
+import { info } from './me/info';
 import { lol } from './search/lol';
+import { team } from './team/index';
 
-export const CommandList: Command[] = [info, lol];
+export const CommandList: Command[] = [info, lol, team];

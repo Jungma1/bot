@@ -2,9 +2,29 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const { DISCORD_TOKEN, CLIENT_ID, RIOT_TOKEN, BOT_ACTIVITY_MS } = process.env;
+const {
+  DISCORD_TOKEN,
+  CLIENT_ID,
+  RIOT_TOKEN,
+  BOT_ACTIVITY_MS,
+  ROLE_BOT_ID,
+  ROLE_ADMIN_ID,
+  ROLE_MASTER_ID,
+  ROLE_MEMBER_ID,
+  ROLE_CANDIDATE_ID,
+} = process.env;
 
-if (!DISCORD_TOKEN || !CLIENT_ID || !RIOT_TOKEN || !BOT_ACTIVITY_MS) {
+if (
+  !DISCORD_TOKEN ||
+  !CLIENT_ID ||
+  !RIOT_TOKEN ||
+  !BOT_ACTIVITY_MS ||
+  !ROLE_BOT_ID ||
+  !ROLE_ADMIN_ID ||
+  !ROLE_MASTER_ID ||
+  !ROLE_MEMBER_ID ||
+  !ROLE_CANDIDATE_ID
+) {
   throw new Error('Missing environment variables');
 }
 
@@ -13,6 +33,11 @@ const config = {
   CLIENT_ID,
   RIOT_TOKEN,
   BOT_ACTIVITY_MS,
+  ROLE_BOT_ID,
+  ROLE_ADMIN_ID,
+  ROLE_MASTER_ID,
+  ROLE_MEMBER_ID,
+  ROLE_CANDIDATE_ID,
 };
 
 export default config;

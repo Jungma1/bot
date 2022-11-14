@@ -1,8 +1,8 @@
-import './config';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
-import config from './config';
 import { CommandList } from './commands';
+import './config';
+import config from './config';
 
 const { DISCORD_TOKEN, CLIENT_ID } = config;
 

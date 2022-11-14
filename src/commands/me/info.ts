@@ -1,7 +1,7 @@
-import { Command } from '../interface/Command';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { EmbedBuilder, hyperlink } from 'discord.js';
-import { emojiPalette } from '../lib/emojiPalette';
+import { Command } from '../../interface/Command';
+import { emojiPalette } from '../../lib/emojiPalette';
 
 export const info: Command = {
   name: '정보',
@@ -9,11 +9,8 @@ export const info: Command = {
   data: new SlashCommandBuilder()
     .setName('정보')
     .setDescription('나래에 대한 정보를 볼 수 있는 명령어에요!'),
-  run: async (interaction) => {
-    const githubHyperLink = hyperlink(
-      'Team Nare',
-      'https://github.com/nare-team'
-    );
+  run: async interaction => {
+    const githubHyperLink = hyperlink('Team Nare', 'https://github.com/nare-team');
 
     const infoEmbed = new EmbedBuilder()
       .setColor('Aqua')
