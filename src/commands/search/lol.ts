@@ -36,7 +36,7 @@ export const lol: Command = {
     const summonerLeagueData = await findSummonerLeagueDataById(summonerData.id);
 
     if (summonerLeagueData.length === 0) {
-      replyRiotEmbed(UNRANKED, interaction, summonerData, summonerLeagueData);
+      return replyRiotEmbed(UNRANKED, interaction, summonerData, summonerLeagueData);
     }
 
     // const gamemode = summonerLeagueData.flatMap((league) => league.queueType);

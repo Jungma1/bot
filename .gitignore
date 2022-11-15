@@ -3,3 +3,6 @@ build
 .env
 yarn-error.log
 .idea
+Dockerfile
+fly.toml
+.dockerignore
