@@ -1,6 +1,6 @@
 import { CommandInteractionOptionResolver, EmbedBuilder, GuildMember, Role } from 'discord.js';
 import config from '../../config';
-import { CommandRun } from './../../interface/CommandRun';
+import { CommandRun } from '../../interface/CommandRun';
 
 export const role: CommandRun = {
   run: async interaction => {
