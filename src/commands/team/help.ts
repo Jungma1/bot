@@ -3,7 +3,7 @@ import { CommandRun } from './../../interface/CommandRun';
 
 export const help: CommandRun = {
   run: async interaction => {
-    interaction.reply({
+    return interaction.reply({
       embeds: [new EmbedBuilder().setColor('Aqua').setDescription('준비중...')],
     });
   },
