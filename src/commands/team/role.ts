@@ -33,7 +33,7 @@ export const role: CommandRun = {
         embeds: [
           new EmbedBuilder()
             .setColor('Red')
-            .setDescription('봇, 관리자 권한이 있는 유저한테는 사용할 수 없어요!'),
+            .setDescription('자신보다 높은 권한이 있는 유저한테는 사용할 수 없어요!'),
         ],
       });
     }
@@ -46,8 +46,25 @@ export const role: CommandRun = {
       });
     }
 
+    const memberRole = await interaction.guild?.roles.cache.find(
+      role => role.id === ROLE_MEMBER_ID
+    );
+    const candidateRole = await interaction.guild?.roles.cache.find(
+      role => role.id === ROLE_CANDIDATE_ID
+    );
+
+    if (!memberRole || !candidateRole) {
+      return interaction.reply({
+        embeds: [
+          new EmbedBuilder().setColor('Red').setDescription(`예기치 못한 오류가 발생했어요!`),
+        ],
+      });
+    }
+
     switch (selected) {
       case '역할부여':
+        await user.roles.remove(candidateRole);
+        await user.roles.remove(memberRole);
         await user.roles.add(role);
         return interaction.reply({
           embeds: [
