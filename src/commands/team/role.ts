@@ -5,7 +5,7 @@ import { sendEmbed } from '../../lib/utils/sendEmbed';
 
 export const role: CommandRun = {
   run: async interaction => {
-    const { ROLE_MEMBER_ID, ROLE_CANDIDATE_ID } = config;
+    const { ROLE_MEMBER_ID, ROLE_CANDIDATE_ID, ROLE_USER_ID } = config;
     const sender = interaction.member as GuildMember;
     const options = interaction.options as CommandInteractionOptionResolver;
     const selected = options.getSubcommand();
@@ -35,6 +35,10 @@ export const role: CommandRun = {
       return sendEmbed.error(`${role} - 지정할 수 없는 역할이에요!`, interaction, {
         ephemeral: true,
       });
+    }
+
+    if (!user.roles.cache.some(role => role.id === ROLE_USER_ID)) {
+      return sendEmbed.error('인증이 필요한 유저에요!', interaction, { ephemeral: true });
     }
 
     const memberRole = await interaction.guild?.roles.cache.find(

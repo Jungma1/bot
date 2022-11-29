@@ -12,6 +12,7 @@ const {
   ROLE_MASTER_ID,
   ROLE_MEMBER_ID,
   ROLE_CANDIDATE_ID,
+  ROLE_USER_ID,
 } = process.env;
 
 if (
@@ -23,7 +24,8 @@ if (
   !ROLE_ADMIN_ID ||
   !ROLE_MASTER_ID ||
   !ROLE_MEMBER_ID ||
-  !ROLE_CANDIDATE_ID
+  !ROLE_CANDIDATE_ID ||
+  !ROLE_USER_ID
 ) {
   throw new Error('Missing environment variables');
 }
@@ -38,6 +40,7 @@ const config = {
   ROLE_MASTER_ID,
   ROLE_MEMBER_ID,
   ROLE_CANDIDATE_ID,
+  ROLE_USER_ID,
 };
 
 export default config;
