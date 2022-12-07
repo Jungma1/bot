@@ -1,11 +1,11 @@
-import { Client, CommandInteraction } from 'discord.js';
+import { CommandInteraction, Events } from 'discord.js';
 import { CommandList } from '../../commands';
 import { Event } from '../../interface/Event';
 
 export const event: Event = {
-  name: 'interactionCreate',
+  name: Events.InteractionCreate,
   once: false,
-  async execute(client: Client, interaction: CommandInteraction) {
+  async execute(interaction: CommandInteraction) {
     if (!interaction.isChatInputCommand()) return;
 
     for (const command of CommandList) {

@@ -1,21 +1,18 @@
-import { ActivityOptions } from 'discord.js';
+import { ActivityOptions, Client, Events } from 'discord.js';
 import config from '../../config';
 import { Event } from '../../interface/Event';
 
 export const event: Event = {
-  name: 'ready',
+  name: Events.ClientReady,
   once: false,
-  async execute(client) {
+  async execute(client: Client) {
     let index = 0;
     const { BOT_ACTIVITY_MS } = config;
 
     setInterval(async () => {
       const serverCount = client.guilds.cache.size;
       const memberCount = client.guilds.cache
-        .map(
-          (guild) =>
-            guild.members.cache.filter((member) => !member.user.bot).size
-        )
+        .map(guild => guild.members.cache.filter(member => !member.user.bot).size)
         .reduce((a, b) => a + b, 0);
 
       const activityList: ActivityOptions[] = [

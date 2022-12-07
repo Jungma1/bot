@@ -13,6 +13,7 @@ const {
   ROLE_MEMBER_ID,
   ROLE_CANDIDATE_ID,
   ROLE_USER_ID,
+  LOSTARK_TOKEN,
 } = process.env;
 
 if (
@@ -25,7 +26,8 @@ if (
   !ROLE_MASTER_ID ||
   !ROLE_MEMBER_ID ||
   !ROLE_CANDIDATE_ID ||
-  !ROLE_USER_ID
+  !ROLE_USER_ID ||
+  !LOSTARK_TOKEN
 ) {
   throw new Error('Missing environment variables');
 }
@@ -41,6 +43,7 @@ const config = {
   ROLE_MEMBER_ID,
   ROLE_CANDIDATE_ID,
   ROLE_USER_ID,
+  LOSTARK_TOKEN,
 };
 
 export default config;
