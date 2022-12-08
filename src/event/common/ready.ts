@@ -23,7 +23,7 @@ export const event: Event = {
           name: `${serverCount}개의 서버에서 나래가 활동`,
         },
         { name: `/정보 명령어를 입력해보세요!` },
-        { name: `/롤전적 명령어로 게임 전적을 확인할 수 있어요!` },
+        { name: `/전적 명령어로 게임 전적을 확인할 수 있어요!` },
       ];
 
       client.user?.setPresence({ activities: [activityList[index]] });
